@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  database:
+    image: "harperdb/harperdb:latest"
+    environment:
+      - HDB_ROOT=/opt/harperdb/hdb
+      - SERVER_PORT=9925
+      - HDB_ADMIN_USERNAME=admin
+      - HDB_ADMIN_PASSWORD=password
+      - LOG_TO_STDSTREAMS=true
+      - RUN_IN_FOREGROUND=true
+    # volumes:
+    #   - harpder_dir:/opt/harperdb/hdb
+    ports:
+      - "9925:9925"
+
+# volumes:
+#   harpder_dir:

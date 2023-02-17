@@ -1,0 +1,61 @@
+{
+  "name": "harper-example",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "James Villarrubia",
+    "email": "james.villarrubia@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
+  },
+  "engines": {
+    "node": "^14.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run mocha",
+    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
+    "dev": "nodemon src/",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive --exit"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "ignore": []
+  },
+  "dependencies": {
+    "@feathersjs/configuration": "^4.5.12",
+    "@feathersjs/errors": "^4.5.12",
+    "@feathersjs/express": "^4.5.12",
+    "@feathersjs/feathers": "^4.5.12",
+    "@feathersjs/socketio": "^4.5.13",
+    "@feathersjs/transport-commons": "^4.5.12",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "feathers-knex": "^8.0.1",
+    "helmet": "^4.6.0",
+    "knex": "^1.0.3",
+    "serve-favicon": "^2.5.0",
+    "sqlite3": "^5.0.2",
+    "winston": "^3.6.0"
+  },
+  "devDependencies": {
+    "axios": "^0.26.1",
+    "eslint": "^8.10.0",
+    "mocha": "^9.2.1",
+    "nodemon": "^2.0.15"
+  }
+}

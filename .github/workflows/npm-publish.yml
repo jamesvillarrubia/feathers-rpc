@@ -8,10 +8,7 @@ on:
   # workflow_dispatch: # allows manual trigger
   push:
     banches:
-      - main
-      - develop
-      - alpha
-      - beta
+      - master
 
 jobs:
   test: 

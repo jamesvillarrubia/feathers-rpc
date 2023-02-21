@@ -2,21 +2,17 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Merge Pull Request & Publish
+name: Release NPM Package
 
 on:
-  pull_request:
-    types: [ closed ]
+  push:
     branches:
+      - main
       - main
       - beta
       - alpha
       - 'releases/**-alpha*' # allow alpha releases
       - 'releases/**-beta*' # allow beta releases
-  push:
-    branches:
-      - main
-
 
 jobs:
   test: 
@@ -48,11 +44,10 @@ jobs:
       - name: Run tests
         run: npm run coverage
 
-
   release:
     needs: test
     name: Release
-    if: github.event.pull_request.merged == true || ${{ github.ref == 'ref/head/main' }} || github.event_name == 'workflow_dispatch'
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -60,6 +55,7 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
+      - run: npm run build --if-present
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

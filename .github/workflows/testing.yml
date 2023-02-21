@@ -1,4 +1,4 @@
-name: Node Lint & Test
+name: Lint & Test
 
 on:
   workflow_dispatch: # allows manual trigger

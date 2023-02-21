@@ -3,7 +3,12 @@ name: Node Lint & Test
 on:
   workflow_dispatch: # allows manual trigger
   pull_request:
-  
+    branches-ignore:
+      - main
+      - beta
+      - alpha
+      - 'releases/**-alpha*' # allow alpha releases
+      - 'releases/**-beta*' # allow beta releases
 
 jobs:
   test: 

@@ -12,15 +12,6 @@ on:
       - develop
       - alpha
       - beta
-  # pull_request:
-  #   types: [ closed ]
-  #   branches:
-  #     - main
-  #     - alpha
-  #     - beta
-  #     - 'releases/**-alpha*' # allow alpha releases
-  #     - 'releases/**-beta*' # allow beta releases
-  
 
 jobs:
   test: 

@@ -6,7 +6,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jamesvillarrubia/feathers-rpc/npm-publish.yml?branch=main)
 
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/NPM/feathers-rpc)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/NPM/feathers-rpc)]()
 
 <!-- [![Download Status](https://img.shields.io/npm/dm/feathers-rpc.svg)](https://www.npmjs.com/package/feathers-rpc) -->
 

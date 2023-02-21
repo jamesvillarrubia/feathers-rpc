@@ -8,6 +8,7 @@ coverage/
 .github/
 .nyc_output
 example/
+examples/
 .eslintrc.json
 .mocharc.json
 .nycrc.json

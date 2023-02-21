@@ -19,8 +19,6 @@ const services = app => {
   });
 };
 
-
-
 describe('Express Feathers Parser', () => {
   it('middleware should not interrupt normal requests', async () => {
     const app = express(feathers());

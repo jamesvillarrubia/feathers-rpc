@@ -5,14 +5,13 @@ const assert = require('assert');
 const parseRpcVerb = require('../../lib/index.js');
 
 describe('Feather params modifications', () => {
-
   it('gets the rpcVerb with id and no query parameters', () => {
     const url = '/contacts/1:request-opt-in';
     const requestObject = {
       url,
       feathers: {},
-      headers:{},
-      rawHeaders:[]
+      headers: {},
+      rawHeaders: []
     };
 
     parseRpcVerb()(requestObject, {}, () => { });
@@ -29,8 +28,8 @@ describe('Feather params modifications', () => {
     const requestObject = {
       url,
       feathers: {},
-      headers:{},
-      rawHeaders:[]
+      headers: {},
+      rawHeaders: []
     };
 
     parseRpcVerb()(requestObject, {}, () => { });
@@ -47,8 +46,8 @@ describe('Feather params modifications', () => {
     const requestObject = {
       url,
       feathers: {},
-      headers:{},
-      rawHeaders:[]
+      headers: {},
+      rawHeaders: []
     };
 
     parseRpcVerb()(requestObject, {}, () => { });
@@ -103,13 +102,13 @@ describe('Feather params modifications', () => {
     ];
     invalidRpcVerbs.forEach(url => {
       const requestObject = { url, feathers: {} };
-      assert.rejects( 
-        ()=>parseRpcVerb(['callRpcVerb'])(requestObject, {}, ()=>{}),
+      assert.rejects(
+        () => parseRpcVerb(['callRpcVerb'])(requestObject, {}, () => {}),
         (err) => {
           assert.strictEqual(err.name, 'Unprocessable');
           assert.strictEqual(err.code, 422);
           return true;
-        },
+        }
       );
     });
   });

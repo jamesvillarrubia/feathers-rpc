@@ -2,6 +2,13 @@ name: Node Lint & Test
 
 on:
   workflow_dispatch: # allows manual trigger
+  push: 
+    branches-ignore:
+      - main
+      - beta
+      - alpha
+      - 'releases/**-alpha*' # allow alpha releases
+      - 'releases/**-beta*' # allow beta releases
   pull_request:
     branches-ignore:
       - main

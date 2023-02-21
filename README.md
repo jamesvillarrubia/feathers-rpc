@@ -1,18 +1,18 @@
-# feathers-openai
+# feathers-rpc
                     
-[![NPM](https://img.shields.io/npm/l/feathers-openai)](https://github.com/jamesvillarrubia/feathers-openai/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-openai?label=latest)](https://www.npmjs.com/package/feathers-openai)
+[![NPM](https://img.shields.io/npm/l/feathers-rpc)](https://github.com/jamesvillarrubia/feathers-rpc/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-rpc?label=latest)](https://www.npmjs.com/package/feathers-rpc)
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jamesvillarrubia/feathers-openai/Node%20Lint%20&%20Test?label=build%20%26%20lint)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/feathers-openai)
-<!-- [![Download Status](https://img.shields.io/npm/dm/feathers-openai.svg)](https://www.npmjs.com/package/feathers-openai) -->
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jamesvillarrubia/feathers-rpc/Node%20Lint%20&%20Test?label=build%20%26%20lint)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/feathers-rpc)
+<!-- [![Download Status](https://img.shields.io/npm/dm/feathers-rpc.svg)](https://www.npmjs.com/package/feathers-rpc) -->
 
-This library is a FeathersJS database adapter for openai - a high-scale, LMDB & NodeJS database. It uses a combination of the raw openai RESTful endpoints and [KnexJS](http://knexjs.org/)-translated queries through openai's subset of supported SQL commands.  It also uses [Harperive](https://www.npmjs.com/package/harperive) for authentication, promise management, and connectivity.  Harperive is exposed internally for developers wishing to build more complex queries in a openai service.
+This library is a FeathersJS database adapter for rpc - a high-scale, LMDB & NodeJS database. It uses a combination of the raw rpc RESTful endpoints and [KnexJS](http://knexjs.org/)-translated queries through rpc's subset of supported SQL commands.  It also uses [Harperive](https://www.npmjs.com/package/harperive) for authentication, promise management, and connectivity.  Harperive is exposed internally for developers wishing to build more complex queries in a rpc service.
 
 ```bash
-npm install --save feathers-openai
+npm install --save feathers-rpc
 ```
 
-> __Important:__ `feathers-openai` implements the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
+> __Important:__ `feathers-rpc` implements the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
 > 
 
 ## API
@@ -21,7 +21,7 @@ npm install --save feathers-openai
 
 
 ```js
-const service = require('feathers-openai');
+const service = require('feathers-rpc');
 app.use('/messages', service({
     //...options
 }););
@@ -46,15 +46,15 @@ __Options:__
 
 __Connection Options:__
 The connection options are passed in as a `config` object inside the options object (i.e. `harper({ config: { ...connection_options } })`)
-- `schema` (**required**) - The name of the schema (i.e. DB-equivalent) in the openai instance
+- `schema` (**required**) - The name of the schema (i.e. DB-equivalent) in the rpc instance
 - `harperHost` (**required**) - The location of the Harper Host
 - `username` (**required**) - The username to connect with
 - `password` (**required**) - The password to connect with
 - `table` (*optional*) - The name of the table referenced by the service, defaults to the configured `name`, but can be overriden by setting `config.table`
 
-These can also be set via a "openai" configuration field in the Feathers `config/{ENV}.json`:
+These can also be set via a "rpc" configuration field in the Feathers `config/{ENV}.json`:
 ```json
-  "openai":{
+  "rpc":{
     "host": "http://localhost:9925",
     "username": "admin",
     "password": "password",
@@ -67,7 +67,7 @@ To set up your service, your service class.js and service.js files should look s
 
 ```javascript
 //books.class.js
-const { Service } = require('feathers-openai');
+const { Service } = require('feathers-rpc');
 exports.Books = class Books extends Service{
   constructor(options, app) {
     super({
@@ -84,7 +84,7 @@ module.exports = function (app) {
   const options = {
     paginate: app.get('paginate'),
     config: {
-      ...app.get('openai'),
+      ...app.get('rpc'),
       table: 'books'
     }
   };
@@ -121,7 +121,7 @@ await service.client.insert({
 You can also use Harperive's generic execution option like so:
 ```javascript
 const options = {
-  operation: 'openai_operation',
+  operation: 'rpc_operation',
   //other fields...
 };
 

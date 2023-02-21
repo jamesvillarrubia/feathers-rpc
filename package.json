@@ -64,6 +64,16 @@
     "name": "James Villarrubia",
     "email": "james.villarrubia@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "James Villarrubia",
+      "email": "james.villarrubia@gmail.com"
+    },
+    {
+      "name": "Ben Zelinski",
+      "email": "bziggz@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jamesvillarrubia/feathers-rpc/issues"

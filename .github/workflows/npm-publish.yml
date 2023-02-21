@@ -23,36 +23,47 @@ on:
   
 
 jobs:
-  test:
+  test: 
+    name: 'Node.js v${{ matrix.node }}'
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12, 14]
+        node:
+          - 14
+          - 16
+          - 18
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run: docker-compose up -d
       - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '${{ matrix.node }}'
+      - uses: actions/checkout@v2
+      - name: 'Cache node_modules'
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-v${{ matrix.node }}-
       - name: Install dependencies
         run: npm ci
       - name: Run linters
         run: npm run lint
       - name: Run tests
-        run: npm test
+        run: npm run coverage
+
 
   release:
     needs: test
     name: Release
-    if: github.event.pull_request.merged || github.event_name == 'workflow_dispatch'
+    if: ${{ github.ref == 'ref/head/main' }} || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 18
       - run: npm ci
+      - run: npm run build
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

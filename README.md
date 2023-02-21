@@ -2,18 +2,16 @@
                     
 [![NPM](https://img.shields.io/npm/l/feathers-rpc)](https://github.com/jamesvillarrubia/feathers-rpc/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/feathers-rpc?label=latest)](https://www.npmjs.com/package/feathers-rpc)
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jamesvillarrubia/feathers-rpc/Node%20Lint%20&%20Test?label=build%20%26%20lint)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jamesvillarrubia/feathers-rpc/npm-publish.yml?branch=main)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/feathers-rpc)
+
 <!-- [![Download Status](https://img.shields.io/npm/dm/feathers-rpc.svg)](https://www.npmjs.com/package/feathers-rpc) -->
 
-This library is a FeathersJS database adapter for rpc - a high-scale, LMDB & NodeJS database. It uses a combination of the raw rpc RESTful endpoints and [KnexJS](http://knexjs.org/)-translated queries through rpc's subset of supported SQL commands.  It also uses [Harperive](https://www.npmjs.com/package/harperive) for authentication, promise management, and connectivity.  Harperive is exposed internally for developers wishing to build more complex queries in a rpc service.
+This library is a FeathersJS middleware for RPC calls
 
 ```bash
 npm install --save feathers-rpc
 ```
-
-> __Important:__ `feathers-rpc` implements the [Feathers Common database adapter API](https://docs.feathersjs.com/api/databases/common.html) and [querying syntax](https://docs.feathersjs.com/api/databases/querying.html).
-> 
 
 ## API
 

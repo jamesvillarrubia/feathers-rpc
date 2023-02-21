@@ -5,9 +5,9 @@
 name: Merge Pull Request & Publish
 
 on:
-  push:
-    banches:
-      - master
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test: 

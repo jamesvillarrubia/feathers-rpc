@@ -1,7 +1,7 @@
 {
   "name": "feathers-rpc",
   "version": "0.0.0-semantic-release",
-  "description": "An open.ai adapter for FeathersJS",
+  "description": "An RPC middleware for FeathersJS v4/v5",
   "main": "lib",
   "directories": {
     "lib": "lib",

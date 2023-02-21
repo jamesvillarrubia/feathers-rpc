@@ -5,9 +5,9 @@
 name: Release NPM Package
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main
       - main
       - beta
       - alpha
@@ -47,7 +47,6 @@ jobs:
   release:
     needs: test
     name: Release
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

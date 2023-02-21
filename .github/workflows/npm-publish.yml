@@ -5,16 +5,13 @@
 name: Merge Pull Request & Publish
 
 on:
-  workflow_dispatch: # allows manual trigger
+  # workflow_dispatch: # allows manual trigger
   push:
     banches:
       - main
       - develop
       - alpha
       - beta
-
-
-      
 
 jobs:
   test: 

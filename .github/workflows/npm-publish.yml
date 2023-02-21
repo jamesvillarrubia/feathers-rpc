@@ -6,13 +6,23 @@ name: Merge Pull Request & Publish
 
 on:
   pull_request:
+    types: [ closed ]
     branches:
       - main
+      - beta
+      - alpha
+      - 'releases/**-alpha*' # allow alpha releases
+      - 'releases/**-beta*' # allow beta releases
+  push:
+    branches:
+      - main
+
 
 jobs:
   test: 
     name: 'Node.js v${{ matrix.node }}'
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || ${{ github.ref == 'ref/head/main' }} || github.event_name == 'workflow_dispatch'
     strategy:
       matrix:
         node:
@@ -42,7 +52,7 @@ jobs:
   release:
     needs: test
     name: Release
-    if: ${{ github.ref == 'ref/head/main' }} || github.event_name == 'workflow_dispatch'
+    if: github.event.pull_request.merged == true || ${{ github.ref == 'ref/head/main' }} || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

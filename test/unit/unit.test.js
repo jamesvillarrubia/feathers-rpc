@@ -140,6 +140,8 @@ describe('Feather params modifications', () => {
     assert.strictEqual(trimmedUrl, '/contacts/1');
   });
 
+
+  
   it('should disable headers when setting is true', () => {
     const url = '/contacts/1:request-opt-in';
     const requestObject = {

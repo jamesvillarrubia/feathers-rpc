@@ -5,7 +5,6 @@
 name: Merge Pull Request & Publish
 
 on:
-  # workflow_dispatch: # allows manual trigger
   push:
     banches:
       - master

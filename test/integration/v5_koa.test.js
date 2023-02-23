@@ -4,8 +4,8 @@
 const assert = require('assert');
 const request = require('supertest');
 const parseRpcVerb = require('../../lib/index.js');
-const feathers = require('@feathersjs/feathers');
-const express = require('@feathersjs/express');
+const feathers = require('../../node_modules/@feathersjs/koa/node_modules/@feathersjs/feathers');
+const koa = require('@feathersjs/koa');
 
 const services = app => {
   class MessageService {
@@ -19,17 +19,16 @@ const services = app => {
   });
 };
 
-describe('Express Feathers Parser', () => {
+describe(`Koa Feathers Parser - ${feathers.version}`, () => {
   it('middleware should not interrupt normal requests', async () => {
-    const app = express(feathers());
-    app.use(express.cors());
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+    const app = koa.koa(feathers());
+    app.use(koa.errorHandler());
+    app.use(koa.bodyParser());
     app.use(parseRpcVerb());
-    app.configure(express.rest());
+    app.configure(koa.rest());
     app.configure(services);
 
-    request(app)
+    request(app.callback())
       .post('/messages')
       .expect(201)
       .end((err, res) => {
@@ -39,15 +38,14 @@ describe('Express Feathers Parser', () => {
   });
 
   it('should parse the RPC verb and add to feathers ctx', async () => {
-    const app = express(feathers());
-    app.use(express.cors());
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+    const app = koa.koa(feathers());
+    app.use(koa.errorHandler());
+    app.use(koa.bodyParser());
     app.use(parseRpcVerb());
-    app.configure(express.rest());
+    app.configure(koa.rest());
     app.configure(services);
 
-    request(app)
+    request(app.callback())
       .post('/messages:callRpcMethod')
       .expect(200)
       .end((err, res) => {

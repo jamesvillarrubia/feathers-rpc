@@ -72,7 +72,7 @@ curl -H "Content-Type: application/json" \
 ```
 
 ## Compatability
-This library is tested against REST APIs for Feathers v4 and v5.  This library also supports Koa on v5.  Additional testing and PRs are Welcome.
+This library is tested against REST APIs for Feathers v4 and v5.  This library also supports Koa on v5.  Additional testing and PRs are welcome.
 
 | feathers | v5                 | v4                 | v3              | 
 |----------|--------------------|--------------------|-----------------|
@@ -82,7 +82,8 @@ This library is tested against REST APIs for Feathers v4 and v5.  This library a
 
 
 ## Contributing
-Please see 
+Please see https://github.com/jamesvillarrubia/feathers-rpc/blob/main/.github/contributing.md
+ 
 ## Credit
 Inspired by work by Ben Zelinski.
 

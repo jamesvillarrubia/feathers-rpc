@@ -72,7 +72,9 @@ curl -H "Content-Type: application/json" \
 ```
 
 ## Compatability
-This library is tested against REST APIs for Feathers v4 and v5.  This library also supports Koa on v5.  Additional testing and PRs are welcome.
+This library is tested against REST APIs for Feathers v4 and v5.  This library also supports Koa on v5. Since the `x-service-method` header functionality does not exist in `v4`, the RPC verb can be extracted inside a hook context or params with the property `params.rpcVerb`.  You can then redirect to a separate function directly.
+
+Additional testing and PRs are welcome.
 
 | feathers | v5                 | v4                 | v3              | 
 |----------|--------------------|--------------------|-----------------|

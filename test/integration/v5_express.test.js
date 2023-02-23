@@ -31,14 +31,8 @@ describe(`Express Feathers Parser - ${feathers.version}`, () => {
     app.use(express.urlencoded({ extended: true }));
     app.use(parseRpcVerb());
     app.configure(express.rest());
-    // app.configure(services);
-    class MessageService {
-      async find (params) { return { data: 'find', params }; }
-      async create (data, params) { return { data: 'create', params }; }
-      async callRpcMethod (data, params) { return { data: 'rpc', params }; }
-    }
-    app.use('messages', new MessageService());
-
+    app.configure(services);
+   
     request(app)
       .post('/messages')
       .expect(201)

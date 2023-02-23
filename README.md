@@ -71,6 +71,18 @@ curl -H "Content-Type: application/json" \
   http://localhost:3030/messages:callRpcMethod
 ```
 
+## Compatability
+This library is tested against REST APIs for Feathers v4 and v5.  This library also supports Koa on v5.  Additional testing and PRs are Welcome.
+
+| feathers | v5                 | v4                 | v3              | 
+|----------|--------------------|--------------------|-----------------|
+| express  | :white_check_mark: | :white_check_mark: | :grey_question: |  
+| koa      | :white_check_mark: | :grey_question:    | :grey_question: |  
+| primus   | :grey_question:    | :grey_question:    | :grey_question: |
+
+
+## Contributing
+Please see 
 ## Credit
 Inspired by work by Ben Zelinski.
 

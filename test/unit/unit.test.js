@@ -117,7 +117,7 @@ describe('Feather params modifications', () => {
       rawHeaders: []
     };
 
-    parseRpcVerb({allowedRpcVerbs:'request-opt-in'})(requestObject, {}, () => { });
+    parseRpcVerb({ allowedRpcVerbs: 'request-opt-in' })(requestObject, {}, () => { });
     const rpcVerb = requestObject.feathers.rpcVerb;
     const trimmedUrl = requestObject.url;
     assert.strictEqual(rpcVerb, 'request-opt-in');
@@ -133,15 +133,13 @@ describe('Feather params modifications', () => {
       rawHeaders: []
     };
 
-    parseRpcVerb({allowedRpcVerbs:['request-opt-in']})(requestObject, {}, () => { });
+    parseRpcVerb({ allowedRpcVerbs: ['request-opt-in'] })(requestObject, {}, () => { });
     const rpcVerb = requestObject.feathers.rpcVerb;
     const trimmedUrl = requestObject.url;
     assert.strictEqual(rpcVerb, 'request-opt-in');
     assert.strictEqual(trimmedUrl, '/contacts/1');
   });
 
-
-  
   it('should disable headers when setting is true', () => {
     const url = '/contacts/1:request-opt-in';
     const requestObject = {
@@ -150,8 +148,8 @@ describe('Feather params modifications', () => {
       headers: {},
       rawHeaders: []
     };
-    parseRpcVerb({disableHeader:true})(requestObject, {}, () => { });
-    assert.strictEqual(requestObject.headers['x-service-method'],undefined);
+    parseRpcVerb({ disableHeader: true })(requestObject, {}, () => { });
+    assert.strictEqual(requestObject.headers['x-service-method'], undefined);
   });
 
   it('should enable headers when setting is empty', () => {
@@ -163,7 +161,7 @@ describe('Feather params modifications', () => {
       rawHeaders: []
     };
     parseRpcVerb({})(requestObject, {}, () => { });
-    assert.strictEqual(requestObject.headers['x-service-method'],'request-opt-in');
+    assert.strictEqual(requestObject.headers['x-service-method'], 'request-opt-in');
   });
 
   it('should return Unprocessable error if RPC is invalid', async () => {

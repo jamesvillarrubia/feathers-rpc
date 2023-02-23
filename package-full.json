@@ -1,0 +1,182 @@
+{
+  "name": "feathers-rpc",
+  "version": "0.0.0-semantic-release",
+  "description": "An RPC middleware for FeathersJS v4/v5",
+  "main": "lib",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "@feathersjs/errors": "^5.0.0-pre.15"
+  },
+  "devDependencies": {
+    "@feathersjs/configuration": "^4.5.12",
+    "@feathersjs/errors": "^4.5.12",
+    "@feathersjs/express": "^4.5.12",
+    "@feathersjs/feathers": "^4.5.12",
+    "@feathersjs/socketio": "^4.5.13",
+    "@feathersjs/transport-commons": "^4.5.12",
+
+    "@feathersjs/express": "^5.0.0-pre.38",
+    "@feathersjs/feathers": "^5.0.0-pre.38",
+    "@feathersjs/configuration": "^5.0.0-pre.38",
+    "@feathersjs/koa": "^5.0.0-pre.38",
+    "@feathersjs/transport-commons": "^5.0.0-pre.38",
+
+
+    "@feathersjs_v4/configuration": "^4.5.12",
+    "@feathersjs_v4/errors": "^4.5.12",
+    "@feathersjs_v4/express": "^4.5.12",
+    "@feathersjs_v4/feathers": "^4.5.12",
+    "@feathersjs_v4/socketio": "^4.5.13",
+    "@feathersjs_v4/transport-commons": "^4.5.12",
+
+    "@feathersjs_v5/express": "npm:@feathersjs/express@^5.0.0-pre.38",
+    "@feathersjs_v5/feathers": "npm:@feathersjs/feathers@^5.0.0-pre.38",
+    "@feathersjs_v5/configuration": "npm:@feathersjs/configuration@^5.0.0-pre.38",
+    "@feathersjs_v5/koa": "npm:@feathersjs/koa@^5.0.0-pre.38",
+    "@feathersjs_v5/transport-commons": "npm:@feathersjs/transport-commons@^5.0.0-pre.38",
+    "@feathersjs_v5/commons": "npm:@feathersjs/commons@^5.0.0-pre.38",
+
+
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.1",
+    "eslint": "^8.34.0",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "semantic-release": "^20.1.0",
+    "semistandard": "^16.0.1",
+    "supertest": "^6.3.3"
+  },
+
+
+  "overrides": {
+    "@feathersjs/commons": "$@feathersjs_v5/commons",
+    "@feathersjs/errors": "$@feathersjs_v5/errors",
+    "@feathersjs/hooks": "$@feathersjs_v5/hooks",
+    "@feathersjs/feathers": {
+      ".": "$@feathersjs_v5/feathers",
+      "@feathersjs/errors": "$@feathersjs_v5/errors",
+      "@feathersjs/hooks": "$@feathersjs_v5/hooks",
+      "@feathersjs/commons": "$@feathersjs_v5/commons"
+    },
+    "@feathersjs/express": {
+      ".": "$@feathersjs_v5/express",
+      "@feathersjs/feathers": "$@feathersjs_v5/feathers",
+      "@feathersjs/errors": "$@feathersjs_v5/errors",
+      "@feathersjs/hooks": "$@feathersjs_v5/hooks",
+      "@feathersjs/commons": "$@feathersjs_v5/commons",
+      "@feathersjs/authentication": "$@feathersjs_v5/authentication"
+    },
+    "@feathersjs/authentication": {
+      ".": "$@feathersjs_v5/authentication",
+      "@feathersjs/feathers": "$@feathersjs_v5/feathers",
+      "@feathersjs/errors": "$@feathersjs_v5/errors",
+      "@feathersjs/hooks": "$@feathersjs_v5/hooks",
+      "@feathersjs/commons": "$@feathersjs_v5/commons",
+      "@feathersjs/schema": "$@feathersjs_v5/schema"
+    }
+  },
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {
+    "lint": "semistandard --fix",
+    "mocha": "mocha --recursive test/**/*.test.js",
+    "testd": "docker-compose up -d && npm run test && docker-compose down",
+    "test": "printf '\\33c\\e[3J' && npm run lint && npm run coverage",
+    "test:dev": "printf '\\33c\\e[3J' && npm run lint && npm run mocha -- --watch --esm --watch-files ./test/**/*,./lib/**",
+    "coverage": "nyc npm run mocha"
+  },
+  "semistandard": {
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "examples/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesvillarrubia/feathers-rpc.git"
+  },
+  "keywords": [
+    "feathers",
+    "rpc",
+    "nlp",
+    "feathers-plugin"
+  ],
+  "author": {
+    "name": "James Villarrubia",
+    "email": "james.villarrubia@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "James Villarrubia",
+      "email": "james.villarrubia@gmail.com"
+    },
+    {
+      "name": "Ben Zelinski",
+      "email": "bziggz@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamesvillarrubia/feathers-rpc/issues"
+  },
+  "homepage": "https://github.com/jamesvillarrubia/feathers-rpc#readme",
+  "release": {
+    "branches": [
+      {
+        "name": "main"
+      },
+      {
+        "name": "alpha",
+        "channel": "alpha",
+        "prerelease": true
+      },
+      {
+        "name": "beta",
+        "channel": "beta",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/git",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true
+        }
+      ],
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "type": "refactor",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            },
+            {
+              "type": "perf",
+              "release": "patch"
+            },
+            {
+              "type": "chore",
+              "release": "patch"
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}

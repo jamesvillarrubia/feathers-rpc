@@ -4,30 +4,40 @@
 const assert = require('assert');
 const request = require('supertest');
 const parseRpcVerb = require('../../lib/index.js');
-const feathers = require('@feathersjs/feathers');
-const express = require('@feathersjs/express');
 
+const feathers = require('../../node_modules/f5_exp/node_modules/@feathersjs/feathers');
+const express = require('f5_exp');
+
+const cors = express.cors ? express.cors : require('cors'); // v4 and v5 compatability
 const services = app => {
   class MessageService {
     async find (params) { return { data: 'find', params }; }
     async create (data, params) { return { data: 'create', params }; }
     async callRpcMethod (data, params) { return { data: 'rpc', params }; }
   }
-
-  app.use('/messages', new MessageService(), {
-    methods: ['find', 'create', 'callRpcMethod']
-  });
+  app.use('messages', new MessageService({}),
+    app.version[0] === '5' // v4 and v5 compatability
+      ? { methods: ['find', 'create', 'callRpcMethod'] }
+      : () => {}
+  );
 };
 
-describe('Express Feathers Parser', () => {
+describe(`Express Feathers Parser - ${feathers.version}`, () => {
   it('middleware should not interrupt normal requests', async () => {
+    // console.log('FEATHERS VERSION: ', feathers.version);
     const app = express(feathers());
-    app.use(express.cors());
+    app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(parseRpcVerb());
     app.configure(express.rest());
-    app.configure(services);
+    // app.configure(services);
+    class MessageService {
+      async find (params) { return { data: 'find', params }; }
+      async create (data, params) { return { data: 'create', params }; }
+      async callRpcMethod (data, params) { return { data: 'rpc', params }; }
+    }
+    app.use('messages', new MessageService());
 
     request(app)
       .post('/messages')
@@ -40,7 +50,7 @@ describe('Express Feathers Parser', () => {
 
   it('should parse the RPC verb and add to feathers ctx', async () => {
     const app = express(feathers());
-    app.use(express.cors());
+    app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(parseRpcVerb());
@@ -53,6 +63,7 @@ describe('Express Feathers Parser', () => {
       .end((err, res) => {
         if (err) console.log(err);
         assert.strictEqual(res.body.data, 'rpc');
+        assert.strictEqual(res.body.params.rpcVerb, 'callRpcMethod');
       });
   });
 });

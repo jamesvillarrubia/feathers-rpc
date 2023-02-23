@@ -4,7 +4,7 @@
 const assert = require('assert');
 const request = require('supertest');
 const parseRpcVerb = require('../../lib/index.js');
-const feathers = require('@feathersjs/feathers');
+const feathers = require('../../node_modules/@feathersjs/koa/node_modules/@feathersjs/feathers');
 const koa = require('@feathersjs/koa');
 
 const services = app => {
@@ -19,7 +19,7 @@ const services = app => {
   });
 };
 
-describe('Koa Feathers Parser', () => {
+describe(`Koa Feathers Parser - ${feathers.version}`, () => {
   it('middleware should not interrupt normal requests', async () => {
     const app = koa.koa(feathers());
     app.use(koa.errorHandler());

@@ -2,25 +2,23 @@ name: Lint & Test
 
 on:
   workflow_dispatch: # allows manual trigger
-  push: 
-    branches-ignore:
-      - main
-      - beta
-      - alpha
-      - 'releases/**-alpha*' # allow alpha releases
-      - 'releases/**-beta*' # allow beta releases
+  push: # only triggers on push events from non-stable branches
+    branches:
+      - '!main'
+      - '!beta'
+      - '!alpha'
   pull_request:
-    branches-ignore:
-      - main
-      - beta
-      - alpha
-      - 'releases/**-alpha*' # allow alpha releases
-      - 'releases/**-beta*' # allow beta releases
+    branches:
+      - main # only works on PRs with base_ref=main and follows limits below
 
 jobs:
   test: 
     name: 'Node.js v${{ matrix.node }}'
     runs-on: ubuntu-latest
+    if: (github.event_name == 'pull_request' && startsWith(github.head_ref,'update-dependencies-') && github.base_ref == 'main') || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     strategy:
       matrix:
         node:

@@ -35,7 +35,7 @@ app.configure(express.rest());
 
 ### `service(options)`
 __Options:__
-- `disableHeader` (**optional**, default: `false`) - Set to true to prevent the `x-service-method` header from being overwritten by the middleware.  The RPC verb can still get capture from the Feathers hook ctx object.
+- `disableHeader` (**optional**, default: `false`) - Set to true to prevent the `x-service-method` header from being overwritten by the middleware.  The RPC verb can still get captured and used from the Feathers hook ctx object.
 - `allowedRpcVerbs` (**optional**. default: `any`) - Accepts a string or an array of strings.  Defaults to fully open, allowing any verb.  Setting to `[]` will disallow any verb. In order to use the `x-service-method` automatic call, the custom method of the service **must** be named exactly the same as the verb sent.
 
 
@@ -69,6 +69,22 @@ curl -H "Content-Type: application/json" \
 curl -H "Content-Type: application/json" \
   -X POST -d '{"message": "Hello world"}' \ 
   http://localhost:3030/messages:callRpcMethod
+```
+
+### Using Verbs with ID
+
+Because the middleware doesn't know available routes or nesting, it cannot distinguish between `messages:verb` and `messages/1:verb`.  In order to pass a specific ID to your custom function, include it in the data `{ id: 1 }` or in the query `messages:verb?id=1`;  This will allow you to fetch that entity and still use the custom methods.
+
+### Extending an existing Service
+
+You can easily add a custom method to any service and use the RPC middleware.  For example, if I was extending a Knex/SQL based service generated from the CLI, I would modify it like so:
+
+```javascript
+export class MessagesService extends KnexService {
+   async callRpcMethod(data, params){
+      //... do fancy stuff
+    }
+}
 ```
 
 ## Compatability

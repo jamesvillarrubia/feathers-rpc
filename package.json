@@ -1,8 +1,9 @@
 {
   "name": "feathers-rpc",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-releaseit",
   "description": "An RPC middleware for FeathersJS v4/v5",
   "main": "lib",
+  "types": "lib/",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -11,20 +12,22 @@
     "@feathersjs/errors": "^5.0.0-pre.38 || ^4.5.12"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.21.0",
     "f5_exp": "npm:@feathersjs/express@^5.0.0-pre.38",
     "f4_exp": "npm:@feathersjs/express@^4.0.0",
     "f5": "npm:@feathersjs/feathers@^5.0.0-pre.38",
     "f4": "npm:@feathersjs/feathers@^4.0.0",
     "@feathersjs/errors":"^5.0.0-pre.38",
     "@feathersjs/koa":"^5.0.0-pre.38",
-    "@semantic-release/commit-analyzer": "^9.0.2",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^9.0.1",
+    "@release-it/conventional-changelog": "^5.1.1",
     "cors": "^2.8.5",
     "eslint": "^8.34.0",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
-    "semantic-release": "^20.1.0",
+    "release-it": "^15.7.0",
     "semistandard": "^16.0.1",
     "supertest": "^6.3.3"
   },
@@ -35,17 +38,20 @@
   "scripts": {
     "lint": "semistandard --fix",
     "mocha": "mocha --recursive test/**/*.test.js",
-    "testd": "docker-compose up -d && npm run test && docker-compose down",
+    "build": "babel src -d lib",
     "test": "printf '\\33c\\e[3J' && npm run lint && npm run coverage",
     "test:dev": "printf '\\33c\\e[3J' && npm run lint && npm run mocha -- --watch --esm --watch-files ./test/**/*,./lib/**",
-    "coverage": "nyc npm run mocha"
+    "coverage": "nyc npm run mocha",
+    "release": "release-it --dry-run --ci --config .release-it.js"
   },
   "semistandard": {
     "env": [
       "mocha"
     ],
     "ignore": [
-      "examples/"
+      "examples/",
+      "node_modules",
+      "lib/"
     ]
   },
   "repository": {
@@ -55,7 +61,6 @@
   "keywords": [
     "feathers",
     "rpc",
-    "nlp",
     "feathers-plugin"
   ],
   "author": {
@@ -76,55 +81,5 @@
   "bugs": {
     "url": "https://github.com/jamesvillarrubia/feathers-rpc/issues"
   },
-  "homepage": "https://github.com/jamesvillarrubia/feathers-rpc#readme",
-  "release": {
-    "branches": [
-      {
-        "name": "main"
-      },
-      {
-        "name": "alpha",
-        "channel": "alpha",
-        "prerelease": true
-      },
-      {
-        "name": "beta",
-        "channel": "beta",
-        "prerelease": true
-      }
-    ],
-    "plugins": [
-      "@semantic-release/git",
-      [
-        "@semantic-release/npm",
-        {
-          "npmPublish": true
-        }
-      ],
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "angular",
-          "releaseRules": [
-            {
-              "type": "refactor",
-              "release": "patch"
-            },
-            {
-              "type": "style",
-              "release": "patch"
-            },
-            {
-              "type": "perf",
-              "release": "patch"
-            },
-            {
-              "type": "chore",
-              "release": "patch"
-            }
-          ]
-        }
-      ]
-    ]
-  }
+  "homepage": "https://github.com/jamesvillarrubia/feathers-rpc#readme"
 }

@@ -18,6 +18,12 @@ const services = app => {
 };
 
 describe(`Express Feathers Parser - ${feathers.version}`, () => {
+  it('should load the right version of Feathers', async () => {
+    const app = express(feathers());
+    const version = app.version;
+    assert.strictEqual(version[0], '4');
+  });
+
   it('middleware should not interrupt normal requests', async () => {
     const app = express(feathers());
     app.use(cors());

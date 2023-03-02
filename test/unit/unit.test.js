@@ -2,7 +2,7 @@
 // mocha --watch flag requires CJS imports
 // See here: https://github.com/mochajs/mocha/issues/4374
 const assert = require('assert');
-const parseRpcVerb = require('../../lib/index.js');
+const parseRpcVerb = require('../../src/index.js');
 
 describe('Feather params modifications', () => {
   it('gets the rpcVerb with id and no query parameters', () => {

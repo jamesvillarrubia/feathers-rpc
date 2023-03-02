@@ -3,7 +3,7 @@
 // See here: https://github.com/mochajs/mocha/issues/4374
 const assert = require('assert');
 const request = require('supertest');
-const parseRpcVerb = require('../../lib/index.js');
+const parseRpcVerb = require('../../src/index.js');
 
 const feathers = require('../../node_modules/f5_exp/node_modules/@feathersjs/feathers');
 const express = require('f5_exp');

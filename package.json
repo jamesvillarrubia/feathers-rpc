@@ -40,7 +40,7 @@
     "mocha": "mocha --recursive test/**/*.test.js",
     "build": "babel src -d lib",
     "test": "printf '\\33c\\e[3J' && npm run lint && npm run coverage",
-    "test:dev": "printf '\\33c\\e[3J' && npm run lint && npm run mocha -- --watch --esm --watch-files ./test/**/*,./lib/**",
+    "test:dev": "printf '\\33c\\e[3J' && npm run lint && npm run mocha -- --watch --esm --watch-files ./test/**/*,./src/**",
     "coverage": "nyc npm run mocha",
     "release": "release-it --dry-run --ci --config .release-it.js"
   },

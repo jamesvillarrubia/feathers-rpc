@@ -32,7 +32,7 @@ describe(`Express Feathers Parser - ${feathers.version}`, () => {
     app.use(parseRpcVerb());
     app.configure(express.rest());
     app.configure(services);
-   
+
     request(app)
       .post('/messages')
       .expect(201)

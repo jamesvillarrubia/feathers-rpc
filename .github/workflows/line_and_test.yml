@@ -3,10 +3,10 @@ name: Lint & Test
 on:
   workflow_dispatch: # allows manual trigger
   push: # only triggers on push events from non-stable branches
-    branches:
-      - '!main'
-      - '!beta'
-      - '!alpha'
+    branches-ignore:
+      - main
+      - beta
+      - alpha
   pull_request:
     branches:
       - main # only works on PRs with base_ref=main and follows limits below

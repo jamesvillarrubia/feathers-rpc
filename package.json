@@ -19,6 +19,7 @@
     "@feathersjs/errors": "^5.0.0-pre.38",
     "@feathersjs/koa": "^5.0.0-pre.38",
     "@release-it/conventional-changelog": "^5.1.1",
+    "conventional-changelog-angular": "^5.0.13",
     "cors": "^2.8.5",
     "eslint": "^8.34.0",
     "f4": "npm:@feathersjs/feathers@^4.0.0",

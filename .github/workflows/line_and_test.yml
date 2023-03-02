@@ -26,12 +26,12 @@ jobs:
           - 16
           - 18
     steps:
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '${{ matrix.node }}'
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: 'Cache node_modules'
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/package.json') }}

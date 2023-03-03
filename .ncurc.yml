@@ -1,7 +1,7 @@
 # This modifies the .github/workflows/update_dependencies.yml call
 # to the npm-check-updates function
 
-reject": 
+reject: 
   - f4
   - f4_exp
 # Locks in the Feathers_v4 and Express_v4 to ensure testing is stable
